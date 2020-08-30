@@ -1,0 +1,20 @@
+{% extends "encyclopedia/layout.html" %}
+
+
+{% block title %}
+    {{pagetitle}}
+{% endblock %}
+
+
+
+{% block body %}
+    <div>
+        {% for post in page %}
+            {{post.title }}
+            {{post.body }}
+        {% endfor %}
+    </div>        
+{% endblock %}
+ 
+
+

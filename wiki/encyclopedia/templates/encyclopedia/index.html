@@ -6,7 +6,7 @@
 
 {% block body %}
     <h1>All Pages</h1>
-
+    
     <ul>
         {% for entry in entries %}
             <li><a href="/wiki/{{entry}}">{{entry}}</a></li>
@@ -14,5 +14,6 @@
             <li>No Pages</li>    
         {% endfor %}
     </ul>
+    
 
 {% endblock %}

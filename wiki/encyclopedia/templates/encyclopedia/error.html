@@ -1,14 +1,15 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    Encyclopedia
+    Oops !
 {% endblock %}
 
 {% block body %}
-    
-    <h1>{{nametitle}}</h1>
-    <div></div>
+
+   <div class="error">
+        <h1>{{ nametitle }}</h1>
         <p>Sorry, No such page exists !</p>
-    </div>
+    </div> 
+    
 
 {% endblock %}
