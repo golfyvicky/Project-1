@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from . import util
+from django import forms
 
+
+class NewTaskForm(forms.Form):
+    pagetitle = forms.CharField(max_length=200, label="New Page Title")
+    pagecontent = forms.CharField(max_length=20000, label="New Page Content")
 
 def index(request):
     if request.POST :
@@ -28,6 +33,9 @@ def index(request):
     })
 
 def checkentry(request, name):
+    if name == 'add':
+        add(request)
+
     if (util.get_entry(name) == None):
         return render(request, "encyclopedia/error.html",{
             "nametitle":name
@@ -38,11 +46,24 @@ def checkentry(request, name):
             "page": util.get_entry(name)
     })
         
-def search(request,searchtag):
-    entries = util.list_entries()
-    search_box = request.POST.get("q").capitalize()
-    #search_box = searchtag.capitalize()
+def add(request):
 
-    if search_box in entries:
-        return HttpResponseRedirect(f"wiki/{search_box}")
+    form = NewTaskForm()
 
+    if request.method=="POST":
+        form = NewTaskForm(request.POST)
+
+        if form.is_valid():
+            pagetitle = form.cleaned_data["pagetitle"]
+            pagecontent = form.cleaned_data["pagecontent"]
+            util.save_entry(pagetitle,pagecontent)
+            return render(request,"encyclopedia/index.html",{
+            "entries": util.list_entries()
+        })
+    
+    else:
+        return render(request,"encyclopedia/add.html",{
+            "form":form
+        })
+
+  

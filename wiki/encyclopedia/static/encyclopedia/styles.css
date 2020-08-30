@@ -34,9 +34,10 @@ textarea {
 }
 .error{
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font: bold;
-    color: red ; 
+    color: rgb(55, 115, 206) ; 
     padding: 10px;
 }
 .sidebar h2 {
