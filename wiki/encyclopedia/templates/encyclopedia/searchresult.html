@@ -1,5 +1,5 @@
 {% extends "encyclopedia/layout.html" %}
-
+{% load markdown_extras %}
 
 {% block title %}
     {{pagetitle}}
@@ -8,12 +8,17 @@
 
 
 {% block body %}
-    <div>
-        {% for post in page %}
-            {{post.title }}
-            {{post.body }}
-        {% endfor %}
-    </div>        
+
+<div>
+
+    <form action = "{% url 'edit' %}" method="POST">
+        {% csrf_token %}
+        </br>
+        {{ page | markdown | safe }}
+        <hr>
+        Edit this page : {{ pagetitle }} </br> <input type="submit" name ="Edit" >  
+    </form>
+</div>    
 {% endblock %}
  
 
