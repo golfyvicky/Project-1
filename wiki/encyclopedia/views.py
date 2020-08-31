@@ -6,10 +6,12 @@ from django import forms
 
 class NewTaskForm(forms.Form):
     pagetitle = forms.CharField(max_length=200, label="New Page Title")
-    pagecontent = forms.CharField(max_length=20000, label="New Page Content")
+    #pagecontent = forms.CharField(max_length=20000, label="New Page Content")
+    #pagecontent = forms.CharField(widget=forms.Textarea(attrs={'cols': 50, 'rows': 5}),label="Page Content")
+    pagecontent = forms.CharField(widget=forms.Textarea(attrs={'cols': 50}),label="Page Content")
 
 def index(request):
-    if request.POST :
+    if (request.POST and request.POST.get("q") !="") :
         
         #searchtag = request.POST.get("q")
         searchtagupper = request.POST.get("q").upper()
