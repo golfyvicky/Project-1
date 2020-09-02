@@ -14,24 +14,34 @@ def index(request):
     if (request.POST and request.POST.get("q") !="") :
         
         searchtagupper = request.POST.get("q").upper()
-        entries = util.list_entries()
-        entriesupper = [entry.upper() for entry in entries]
+        entrynames = util.list_entries()
+        entriesupper = [entry.upper() for entry in entrynames]
         
         if searchtagupper in entriesupper:
             
             searchtag = request.POST.get("q")
-           
             return render(request, "encyclopedia/searchresult.html",{
                 "pagetitle" : searchtagupper,
                 "page": util.get_entry(request.POST.get("q"))
             })
+
+        if searchtagupper not in entriesupper:
+            filenames=[]
+            for entry in entriesupper:
+                if (entry.find(searchtagupper) != -1):
+                   filenames.append(entry)
+
+            return render(request, "encyclopedia/index.html", {
+                "entries": filenames
+            })                   
+                    
         else:
             return render(request, "encyclopedia/error.html",{
                 "searchtag" : request.POST.get("q")
             })
     else:
         return render(request, "encyclopedia/index.html", {
-        "entries": util.list_entries()
+            "entries": util.list_entries()
     })
 
 def checkentry(request, name):
@@ -67,23 +77,17 @@ def add(request):
             "form":form
         })
 
+
 def edit(request):
-    if (request.POST) :
-        #form = NewTaskForm(request.POST)
-        pagetitle = request.session["pagetitle"]
-        pagecontent = request.session["title"]
-        #form.pagecontent = util.get_entry(form.pagetitle)
-        """if form.is_valid():
-            pagetitle = form.cleaned_data['pagetitle']
-            pagecontent = form.cleaned_data['pagecontent']
-            #form.pagetitle = "pagetitle"
-            #form.pagecontent = "pagecontent"
-            """
-        return render(request,"encyclopedia/add.html",{
-            "form":form
-        })
-    else: 
-        return render(request, "encyclopedia/index.html", {
-        "entries": util.list_entries()
-    })    
+
+    pagetitle = request.POST.get("pagetitle")
+    pagecontent = request.POST.get("pagecontent")
+    form = NewTaskForm(data=request.POST)
+    form.pagetitle = pagetitle
+    form.pagecontent = pagecontent
+    return render(request,"encyclopedia/add.html",{
+        "form":form
+    })
+    
+
     

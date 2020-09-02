@@ -16,6 +16,8 @@
         </br>
         {{ page | markdown | safe }}
         <hr>
+        <input type="hidden" name="pagetitle" value="{{ pagetitle }}">
+        <input type="hidden" name="pagecontent" value="{{ page }}">
         Edit this page : {{ pagetitle }} </br> <input type="submit" name ="Edit" >  
     </form>
 </div>    
