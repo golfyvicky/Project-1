@@ -6,4 +6,64 @@
 
 
 
+***see this***
+
+
+
+Arty deplymemnt in mtns is .. study here [Arty](Arty)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ###This is the *way* of right way of formatting in Markdown. This gets rendered as image.

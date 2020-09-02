@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from . import util
 from django import forms
 
+import random
 
 class NewTaskForm(forms.Form):
     pagetitle = forms.CharField(max_length=200, label="Page Title")
@@ -89,5 +90,14 @@ def edit(request):
         "form":form
     })
     
+def randompage(request):
+    entries = []
+    entries = util.list_entries()
+    name = random.choice(entries)
+    return render(request, "encyclopedia/searchresult.html",{
+        "pagetitle" : name,
+        "page": util.get_entry(name)
+    })
+
 
     
